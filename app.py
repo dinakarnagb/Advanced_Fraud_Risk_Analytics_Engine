@@ -9,6 +9,12 @@ import os
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
+import zipfile
+
+# Automatically extract data if the folder doesn't exist on the server
+if not os.path.exists('data') and os.path.exists('data.zip'):
+    with zipfile.ZipFile('data.zip', 'r') as zip_ref:
+        zip_ref.extractall('.')
 
 # 1. Page Configuration
 st.set_page_config(
