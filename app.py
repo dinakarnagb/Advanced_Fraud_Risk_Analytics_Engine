@@ -149,7 +149,7 @@ def generate_chart_insights(df: pd.DataFrame, chart_type: str, x_col: str, y_col
 @st.cache_data
 def load_data():
     colab_path = "/content/drive/MyDrive/Advanced_Fraud_Risk_Analytics_Engine/data/transformed_data/engineered_fraud_features.csv"
-    local_path = "data/transformed_data/engineered_fraud_features.csv"
+    local_path = "Advanced_Fraud_Risk_Analytics_Engine/data/transformed_data/engineered_fraud_features.csv"
 
     if os.path.exists(colab_path):
         file_path = colab_path
