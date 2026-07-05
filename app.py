@@ -16,10 +16,10 @@ import zipfile
 # ===========================================================================
 
 # 1. Unpack the data package safely if it exists
-if os.path.exists('data.zip'):
-    with zipfile.ZipFile('data.zip', 'r') as zip_ref:
+if os.path.exists('Advanced_Fraud_Risk_Analytics_Engine.zip'):
+    with zipfile.ZipFile('Advanced_Fraud_Risk_Analytics_Engine.zip', 'r') as zip_ref:
         zip_ref.extractall('.')
-    print("✅ data.zip successfully extracted.")
+    print("✅ Advanced_Fraud_Risk_Analytics_Engine.zip successfully extracted.")
 
 # 2. Dynamic Asset Discovery Engine
 def resolve_asset_path(target_filename):
