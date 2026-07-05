@@ -9,12 +9,42 @@ import os
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
-import zipfile
 
-# Automatically extract data if the folder doesn't exist on the server
-if not os.path.exists('data') and os.path.exists('data.zip'):
+# ===========================================================================
+# AUTOMATED DATA ASSET UNPACKING & DYNAMIC PATH RESOLUTION
+# ===========================================================================
+
+# 1. Unpack the data package safely if it exists
+if os.path.exists('data.zip'):
     with zipfile.ZipFile('data.zip', 'r') as zip_ref:
         zip_ref.extractall('.')
+    print("✅ data.zip successfully extracted.")
+
+# 2. Dynamic Asset Discovery Engine
+def resolve_asset_path(target_filename):
+    """Recursively searches the directory tree to find the file, bypassing nesting errors."""
+    for root, dirs, files in os.walk('.'):
+        # Ignore virtual environments or git directories to speed up search
+        if any(ignored in root for ignored in ['venv', '.git', '.config']):
+            continue
+        if target_filename in files:
+            return os.path.join(root, target_filename)
+    return None
+
+# 3. Resolve your required dataset paths dynamically
+DATASET_PATH = resolve_asset_path('dataset.csv')
+CLEANED_DATA_PATH = resolve_asset_path('cleaned_applications.csv')
+ENGINEERED_FEATURES_PATH = resolve_asset_path('engineered_fraud_features.csv')
+
+# 4. Critical Guardrail Check
+if not ENGINEERED_FEATURES_PATH:
+    st.error("""
+        ❌ **Critical Error: Could not locate engineered data assets.** 
+        Please ensure that `engineered_fraud_features.csv` exists inside your uploaded `data.zip` package.
+    """)
+    st.stop()
+else:
+    print(f"🎯 Successfully mapped engineered features to: {ENGINEERED_FEATURES_PATH}")
 
 # 1. Page Configuration
 st.set_page_config(
