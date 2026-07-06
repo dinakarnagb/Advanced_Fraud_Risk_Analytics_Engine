@@ -737,23 +737,22 @@ if analysis_type in ["Show All Workspace", "Segmented Profile & Target Analysis"
     # --- CHART 22 ---
     if analysis_type == "Show All Workspace" or sub_chart in ["All Profile & Target Frameworks", "22. Debt Variance and Confidence Intervals Across Payment Behaviour Types"]:
         st.markdown("#### **22. Debt Variance and Confidence Intervals Across Payment Behaviour Types**")
-        l_col, r_col = st.columns([1, 1])
-        with l_col:
-            if 'Payment_Behaviour' in filtered_df.columns:
-                pb_stats = filtered_df.groupby('Payment_Behaviour')['Outstanding_Debt'].agg(['mean', 'std', 'count']).reset_index()
-                pb_stats['error'] = pb_stats['std'] / (pb_stats['count'] ** 0.5)
-                fig_c22 = px.scatter(pb_stats, x='mean', y='Payment_Behaviour', error_x='error', color='Payment_Behaviour', labels={'mean': 'Outstanding Debt ($)'}, template="plotly_dark")
-                st.plotly_chart(fig_c22.update_layout(height=350, margin=dict(l=20,r=20,t=20,b=40)), width="stretch")
-            else: st.warning("⚠️ Column 'Payment_Behaviour' not found.")
-        with r_col:
-            if "insights_chart_22_p" not in st.session_state: st.session_state.insights_chart_22_p = None
-            if st.button("🔮 Generate Live AI Insights", key="btn_chart_22_p"):
-                with st.spinner("Analyzing behavior load traces..."):
-                    st.session_state.insights_chart_22_p = generate_chart_insights(df=filtered_df, chart_type="Bar Chart", x_col="Payment_Behaviour", y_col="Outstanding_Debt")
-            if st.session_state.insights_chart_22_p:
-                render_risk_briefing(st.session_state.insights_chart_22_p.selection_rationale, st.session_state.insights_chart_22_p.analytical_insight, st.session_state.insights_chart_22_p.business_impact, st.session_state.insights_chart_22_p.risk_mitigation)
-            else: st.info("💡 Click the button above to automatically analyze this risk trace profile.")
-        st.markdown("---")
+        
+        if 'Payment_Behaviour' in filtered_df.columns:
+            pb_stats = filtered_df.groupby('Payment_Behaviour')['Outstanding_Debt'].agg(['mean', 'std', 'count']).reset_index()
+            pb_stats['error'] = pb_stats['std'] / (pb_stats['count'] ** 0.5)
+            fig_c22 = px.scatter(pb_stats, x='mean', y='Payment_Behaviour', error_x='error', color='Payment_Behaviour', labels={'mean': 'Outstanding Debt ($)'}, template="plotly_dark")
+            st.plotly_chart(fig_c22.update_layout(height=350, margin=dict(l=250,r=20,t=20,b=40)), width="stretch")
+        else: st.warning("⚠️ Column 'Payment_Behaviour' not found.")
+      
+        if "insights_chart_22_p" not in st.session_state: st.session_state.insights_chart_22_p = None
+        if st.button("🔮 Generate Live AI Insights", key="btn_chart_22_p"):
+            with st.spinner("Analyzing behavior load traces..."):
+                st.session_state.insights_chart_22_p = generate_chart_insights(df=filtered_df, chart_type="Bar Chart", x_col="Payment_Behaviour", y_col="Outstanding_Debt")
+        if st.session_state.insights_chart_22_p:
+            render_risk_briefing(st.session_state.insights_chart_22_p.selection_rationale, st.session_state.insights_chart_22_p.analytical_insight, st.session_state.insights_chart_22_p.business_impact, st.session_state.insights_chart_22_p.risk_mitigation)
+        else: st.info("💡 Click the button above to automatically analyze this risk trace profile.")
+    st.markdown("---")
 
     # --- CHART 23 ---
     if analysis_type == "Show All Workspace" or sub_chart in ["All Profile & Target Frameworks", "23. Operational Balance Profile of Target (Fraud_Label)"]:
