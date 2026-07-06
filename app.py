@@ -214,7 +214,7 @@ def render_risk_briefing(rationale, insight, business, risk):
 # =====================================================================
 # 3. SIDEBAR CONTROL PANEL WITH EXPLICIT WIDGET STATE RESET PIPELINE
 # =====================================================================
-brand_logo_path = "/content/drive/MyDrive/Advanced_Fraud_Risk_Analytics_Engine/images/paisabazzar_logo.jpg"
+brand_logo_path = "Advanced_Fraud_Risk_Analytics_Engine/images/paisabazzar_logo.jpg"
 
 if os.path.exists(brand_logo_path):
     st.sidebar.image(brand_logo_path, width="stretch")
@@ -354,7 +354,7 @@ else:
 if os.path.exists(brand_logo_path):
     st.image(brand_logo_path, width=320)
 elif os.path.exists("paisabazzar_logo.jpg"):
-    st.image("paisabazzar_logo.jpg", width=320)
+    st.image("paisabazzar_logo.jpg", width="stretch")
 
 st.markdown(
     "<h1 style='text-align: left; font-size: 38px; margin-top: 15px; margin-bottom: 0px;'>📊 Advanced Fraud Risk Analytics Engine</h1>",
