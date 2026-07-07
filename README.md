@@ -25,11 +25,11 @@ This architecture successfully processes an operational dataset of **100,000 rec
 
 
 * **Phase III: Feature Engineering & Transformation Pipeline 🚀🛠️🤖🧬**
-* *Steps 6–10:* Pipeline cross-checks, feature engineering engine, and transformed data exports.
+* *Steps 6–7:* Pipeline cross-checks, feature engineering engine, and transformed data exports.
 
 
 * **Phase IV: Diagnostic Intelligence & Schema Integrity Gate 📊🛡️⚖️**
-* *Steps 11–14:* Exploratory Data Analysis (EDA) roadmap, 24-chart diagnostic suite, and entity resolution audit.
+* *Steps 8–14:* Exploratory Data Analysis (EDA) roadmap, 24-chart diagnostic suite, and entity resolution audit.
 
 
 * **Phase V: Mission Command Center — Integrated Advanced Fraud Risk Engine 🌐🤖🚀**
